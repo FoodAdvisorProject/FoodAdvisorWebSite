@@ -1,5 +1,11 @@
 <!DOCTYPE HTML PUBLIC>
 <html class="supernova"><head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta property="og:title" content="Do you want to become a beta tester?" >
 <meta property="og:description" content="Please click the link to complete this form.">
@@ -209,7 +215,7 @@
   transition-timing-function: ease;
   background-color: rgba(235, 104, 65, 0.4);
 }
-/* ömer */
+/* Ã¶mer */
 .form-radio-item,
 .form-checkbox-item {
   padding-bottom: 0px !important;
@@ -218,7 +224,7 @@
 .form-checkbox-item:last-child {
   padding-bottom: 0;
 }
-/* ömer */
+/* Ã¶mer */
 .form-single-column .form-checkbox-item,
 .form-single-column .form-radio-item {
   width: 100%;
@@ -617,6 +623,36 @@ li[data-type="control_image"] img {
 </script>
 </head>
 <body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <ul class="w3-navbar" id="myNavbar">
+    <li class="w3-hide-medium w3-hide-large w3-opennav w3-right">
+      <a class="w3-hover-black" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+        <i class="fa fa-bars"></i>
+      </a>
+    </li>
+    <li class="w3-left-align"><a href="../index.html#home"><i class="fa fa-home"></i>HOME</a></li>
+    <li class="w3-hide-small"><a href="../index.html#about"><i class="fa fa-user"></i> ABOUT US</a></li>
+    <li class="w3-hide-small"><a href="../index.html#portfolio"><i class="fa fa-th"></i> HOW IT WORKS</a></li>
+    <li class="w3-hide-small"><a href="../index.html#contact"><i class="fa fa-envelope"></i> CONTACTS</a></li>
+  
+  </ul>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-hide w3-hide-large w3-hide-medium">
+    <ul class="w3-navbar w3-left-align w3-white">
+      <li><a href="../index.html#about" onclick="toggleFunction()">ABOUT US</a></li>
+      <li><a href="../index.html#portfolio" onclick="toggleFunction()">HOW IT WORKS</a></li>
+      <li><a href="../index.html#contact" onclick="toggleFunction()">CONTACTS</a></li>
+      <li class="w3-hide-small w3-right">
+
+    </ul>
+  </div>
+</div>
+
+
+
 <form class="jotform-form" action="https://submit.jotformeu.com/submit/70447349791365/" method="post" name="form_70447349791365" id="70447349791365" accept-charset="utf-8">
   <input type="hidden" name="formID" value="70447349791365" />
   <div class="form-all">
@@ -711,6 +747,17 @@ li[data-type="control_image"] img {
     </ul>
   </div>
   <script>
+  // Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w3-navbar" + " w3-card-2" + " w3-animate-top" + " w3-white";
+    } else {
+        navbar.className = navbar.className.replace(" w3-card-2 w3-animate-top w3-white", "");
+    }
+}
+
   JotForm.showJotFormPowered = false;
   </script>
   <input type="hidden" id="simple_spc" name="simple_spc" value="70447349791365" />
