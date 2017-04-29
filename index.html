@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="polaroid.css">
-
+<link rel="stylesheet" href="login.css">
 
 
 </head>
@@ -89,7 +89,7 @@ body, html {
     <li class="w3-hide-small"><a href="#about"><i class="fa fa-group"></i> CHI SIAMO</a></li>
     <li class="w3-hide-small"><a href="#portfolio"><i class="fa fa-gear"></i> COME FUNZIONA</a></li>
     <li class="w3-hide-small"><a href="#contact"><i class="fa fa-envelope"></i> CONTATTI</a></li>
-    
+     <li class="w3-hide-small"><a href="./registrazione.html"><i class="fa fa-wpforms"></i> REGISTRAZIONE</a></li>
     <!--<li class="w3-right">
      <a href="./index.html" class="eng-flag" title="Site in English language"></a>    </li>
      <li class=" w3-right">
@@ -97,6 +97,9 @@ body, html {
        <li class="w3-hide-small"><a href="./registrazione.html"><i class="fa fa-wpforms"></i> REGISTRAZIONE</a></li>-->
         <li class="w3-hide-small"><a href="./qrcode.html"><i class="fa fa-qrcode"></i> Prova l'app</a></li>
         <li class="w3-hide-small"><a href="https://play.google.com/store/apps/details?id=pro.rane.foodadvisor&hl=it" target="_blank" ><i class="fa fa-android"></i> Scarica l'app</a></li>
+         <li class="w3-hide-small hidden" id="ap"  style="width:auto;" ><a href="./areapersonale.html"><i class="fa fa-user"></i> Area Pesonale</a></li>
+        <li class="w3-hide-small " id="in" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" ><a ><i class="fa fa-lock"></i> LOGIN</a></li>
+        <li class="w3-hide-small hidden" id="out"  style="width:auto;" ><a ><i class="fa fa-unlock"></i> LOGOUT</a></li>
 
          
 
@@ -127,7 +130,34 @@ body, html {
   </div>
 </div>
 
-<
+<!--login section-->
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" name="myForm" >
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="./immagini/avatar.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label><b>Email</b></label>
+      <input type="text" placeholder="Inserisci Username" name="email" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Inserisci Password" name="password" required>
+        
+      <!--<button type="submit">Login</button>-->
+    
+      <button id="button" onclick="logIn();" style="width:auto;">Login</button>
+      <!--<input type="checkbox" checked="checked"> Ricordami-->
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Annulla</button>
+      <!--<span class="psw">Hai dimenticato la <a href="#">password?</a></span>-->
+    </div>
+  </form>
+</div>
 
 
 <!-- Container (About Section) -->
@@ -138,6 +168,7 @@ body, html {
 </p>
 
 
+      
       
  <ul class="polaroids large-block-grid-4 small-block-grid-2">
 
@@ -329,6 +360,56 @@ function myMap()
   marker.setMap(map);
 }
 
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+
+function logIn(){
+    
+    var username = document.forms["myForm"]["email"].value;
+    var password= document.forms["myForm"]["password"].value;
+   
+    var x=httpGet("http://rane.pro:8080/getUser?email="+username+"&password="+password);
+    if(x==null|| x=="Error: null"){
+        alert("dati errati");
+        return false;
+    }
+    else{
+        localStorage.username=username;
+        localStorage.password=password;
+        alert("login effettuato con successo");
+         document.getElementById('in').style.display='none';
+          document.getElementById('out').style.display='block'
+          document.getElementById('ap').style.display='block'
+        return true;
+    }
+
+}
+
+function logOut(){
+    if(confirm("Sicuro di voler uscire?")){
+        localStorage.clear();
+        alert("log out eseguito");
+        document.getElementById('in').style.display='block';
+        document.getElementById('out').style.display='none';
+        document.getElementById('ap').style.display='none';
+        return true;
+    }
+    else
+        return false;
+}
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( );
+    return xmlHttp.responseText;
+}
 // Change style of navbar on scroll
 window.onscroll = function() {myFunction()};
 function myFunction() {
@@ -340,6 +421,25 @@ function myFunction() {
     }
 }
 
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+// Get the modal login
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal login, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3YIqtf7eAYQJqQs8nfS1BdEhkBhvm0rY  &callback=myMap"></script>

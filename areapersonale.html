@@ -74,8 +74,8 @@ body, html {
       </a>
     </li>
     <li class="w3-left-align"><a href="./index.html#home"><i class="fa fa-home"></i>HOME</a></li>
-    <li class="w3-hide-small"><a href="./index.html#about"><i class="fa fa-group"></i> CHI SIAMO</a></li>
-    <li class="w3-hide-small"><a href="./index.html#portfolio"><i class="fa fa-gear"></i> COME FUNZIONA</a></li>
+    <li class="w3-hide-small"><a href="./index.html#about"><i class="fa fa-user"></i> CHI SIAMO</a></li>
+    <li class="w3-hide-small"><a href="./index.html#portfolio"><i class="fa fa-th"></i> COME FUNZIONA</a></li>
     <li class="w3-hide-small"><a href="./index.html#contact"><i class="fa fa-envelope"></i> CONTATTI</a></li>
      <li class="w3-hide-small"><a href="./registrazione.html"><i class="fa fa-wpforms"></i> REGISTRAZIONE</a></li>
     <!--<li class="w3-right">
@@ -83,7 +83,7 @@ body, html {
      <li class=" w3-right">
      <a href="./ita.html" class="ita-flag" title="Site in Italian language"></a>    </li>
        <li class="w3-hide-small"><a href="./registrazione.html"><i class="fa fa-wpforms"></i> REGISTRAZIONE</a></li>-->
-        <li class="w3-hide-small"><a href="./qrcode.html"><i class="fa fa-qrcode"></i> Prova l'app</a></li>
+        <li class="w3-hide-small"><a href="./qrcode.html"><i class="fa fa-qrcode"></i> QR CODE</a></li>
         <li class="w3-hide-small"><a href="https://play.google.com/store/apps/details?id=pro.rane.foodadvisor&hl=it" target="_blank" ><i class="fa fa-android"></i> Scarica l'app</a></li>
         <li class="w3-hide-small" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" ><a ><i class="fa fa-lock"></i> LOGIN</a></li>
          
@@ -113,7 +113,7 @@ body, html {
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" >
   <div class="w3-display-middle" style="white-space:nowrap;">
-    <span class="w3-center w3-padding-xlarge w3-red w3-xlarge w3-wide w3-animate-opacity">Prova Percorsi</span>
+    <span class="w3-center w3-padding-xlarge w3-red w3-xlarge w3-wide w3-animate-opacity">Area Personale</span>
   </div>
 </div>
 <!--login section-->
@@ -133,7 +133,7 @@ body, html {
       <input type="password" placeholder="Inserisci Password" name="psw" required>
         
       <button type="submit">Login</button>
-      <input type="checkbox" checked="checked"> Ricordami
+      <!--<input type="checkbox" checked="checked"> Ricordami-->
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
@@ -142,44 +142,9 @@ body, html {
     </div>
   </form>
 </div>
-
-<div class="w3-content w3-container w3-padding-64" >
-  <h4>Scansiona uno di questi QrCode con l'app sul tuo smartphone per vedere un esempio di funzionamento dell'applicazione</h4>
-  <table>
-    <tr>
-      <td>
-        <img src="http://rane.pro:8080/getUserImage?user_id=1" alt="img_aldo" ><p>Aldo</p>
-      </td>
-      <td>
-        <img src="./immagini/aldo.png" alt="qr_aldo" >
-      </td>
-    </tr>
-     <tr>
-      <td>
-        <img src="http://rane.pro:8080/getUserImage?user_id=33" alt="img_mario" ><p>Mario</p>
-      </td>
-      <td>
-        <img src="./immagini/mario.png" alt="qr_mario" >
-      </td>
-    </tr>
-     <tr>
-      <td>
-        <img src="http://rane.pro:8080/getUserImage?user_id=34" alt="img_luigi" ><p>Luigi</p>
-      </td>
-      <td>
-        <img src="./immagini/luigi.png" alt="qr_luigi" >
-      </td>
-    </tr>
-
-  </table>
-
-</div>
-
-<div class="w3-content w3-container w3-padding-64" >
-<h6>Se ti vuoi divertire a codificare un testo in un QR_CODE scrivi qua sotto e premi Invio  ;)</h6>
-<input id="text" type="text" value="foodadvisor" style="width:80%" /><br />
-<div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
-</div>
+<br><br><br>
+<img src="http://rane.pro:8080/getUserImage?user_id=1" alt="user image" heigth="300" width="300">
+<button onclick="getArticles()">Click me</button>
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
   <a href="#home" class="w3-btn w3-padding w3-light-grey w3-hover-grey"><i class="fa fa-arrow-up w3-margin-right"></i>Vai all'inizio</a>
@@ -193,34 +158,7 @@ body, html {
  
 
 <script>
-var qrcode = new QRCode(document.getElementById("qrcode"), {
-  width : 100,
-  height : 100
-});
 
-function makeCode () {    
-  var elText = document.getElementById("text");
-  
-  if (!elText.value) {
-    alert("Input a text");
-    elText.focus();
-    return;
-  }
-  
-  qrcode.makeCode(elText.value);
-}
-
-makeCode();
-
-$("#text").
-  on("blur", function () {
-    makeCode();
-  }).
-  on("keydown", function (e) {
-    if (e.keyCode == 13) {
-      makeCode();
-    }
-  });
 
 
 // Modal Image Gallery
@@ -250,6 +188,20 @@ function toggleFunction() {
     } else {
         x.className = x.className.replace(" w3-show", "");
     }
+}
+
+function getArticles(){
+    var x=httpGet("rane.pro:8080/getUserArticles?user_id=1");
+    console.log(x);
+   
+}
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    console.log(xmlHttp.responseText);
+    return xmlHttp.responseText;
 }
 </script>
 
